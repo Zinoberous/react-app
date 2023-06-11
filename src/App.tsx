@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Spinner } from 'reactstrap';
 import { Login, Private, Home } from './views';
-import styles from './App.module.css';
+import styles from './App.module.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 
 function App(): JSX.Element {
@@ -19,7 +19,7 @@ function App(): JSX.Element {
             {/* Not found */}
             <Route
               path='*'
-              element={<Navigate replace to='login' />}
+              element={<>Existiert nicht!</>}
             />
             {/* Routes */}
             <Route

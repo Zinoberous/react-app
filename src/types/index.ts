@@ -1,2 +1,2 @@
 export type NULL = null|undefined;
-export type JSON = Record<string, any>
+export type JSON = Record<string, any>;
