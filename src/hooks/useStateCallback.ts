@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 type Callback = () => void;
-type PartialRecord<K extends keyof any, T> = Partial<Record<K, T>> 
+type PartialRecord<K extends keyof any, T> = Partial<Record<K, T>>
 type DispatchWithCallback<T> = (value: PartialRecord<keyof T, any>, callback?: Callback) => void;
 
-function useStateCallback<T>(initialState: T | (() => T)): [T, DispatchWithCallback<T>] {
+export function useStateCallback<T>(initialState: T | (() => T)): [T, DispatchWithCallback<T>] {
   const [state, _setState] = useState(initialState);
 
   const callbackRef = useRef<Callback>();
@@ -20,5 +20,3 @@ function useStateCallback<T>(initialState: T | (() => T)): [T, DispatchWithCallb
 
   return [state, setState];
 }
-
-export default useStateCallback;

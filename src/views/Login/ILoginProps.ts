@@ -1,2 +1,3 @@
-export interface ILoginProps {
+export default interface ILoginProps {
+  redirect: string;
 }
