@@ -1,5 +1,5 @@
-import { getLocalValue } from '../helper';
 import { JSON } from '../types';
+import { getLocalValue } from '../helper';
 
 interface ILoginState {
   token?: string

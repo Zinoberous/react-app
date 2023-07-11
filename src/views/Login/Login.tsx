@@ -11,6 +11,8 @@ import styles from './Login.module.scss';
 function Login(props: ILoginProps): JSX.Element {
   const [state, setState] = useStateCallback<ILoginState>({
     loading: false,
+    email: null,
+    password: null,
     authError: false,
     submitted: false
   });
@@ -22,8 +24,6 @@ function Login(props: ILoginProps): JSX.Element {
   const service = useContext(ApiServiceContext);
 
   const dispatch = useDispatch();
-
-  dispatch({ type: 'set_login', email: null, password: null });
 
   return (
     <div className={styles.login}>

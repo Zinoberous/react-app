@@ -1,7 +1,6 @@
 import React, { createContext } from 'react';
 import axios from 'axios';
 import Store from '../store';
-import { encryptRsa, getHash } from '../helper';
 
 export interface IApiService {
   login: (email: string, password: string) => Promise<string>;
@@ -23,5 +22,10 @@ async function call(method: 'GET' | 'POST' | 'PUT' | 'DELETE', api: string, para
 }
 
 async function login(email: string, password: string): Promise<string> {
-  return call('POST', process.env.REACT_APP_API_LOGIN, {}, { Authorization: `Basic ${email}:${encryptRsa(process.env.REACT_APP_LOGIN_PUBLIC_KEY, getHash(password))}` });
+  var formData = new FormData();
+
+  formData.append('email', email);
+  formData.append('password', password);
+
+  return call('POST', process.env.REACT_APP_API_LOGIN, {}, {}, formData);
 }
