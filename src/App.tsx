@@ -27,7 +27,7 @@ function App(): JSX.Element {
               element={<Login />}
             />
             <Route
-              path='/home'
+              path='home'
               element={<Private Component={Home} />}
             />
           </Routes>

@@ -1,2 +1,2 @@
-export interface ILoginState {
+export default interface ILoginState {
 }

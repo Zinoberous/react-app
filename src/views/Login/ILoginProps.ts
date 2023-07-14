@@ -1,2 +1,2 @@
-export interface ILoginProps {
+export default interface ILoginProps {
 }

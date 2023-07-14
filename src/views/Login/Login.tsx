@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ILoginProps } from './ILoginProps';
-import { ILoginState } from './ILoginState';
-import useStateCallback from '../../hooks/useStateCallback';
+import ILoginProps from './ILoginProps';
+import ILoginState from './ILoginState';
+import { useStateCallback } from '../../hooks';
 import styles from './Login.module.scss';
 
 interface IProps extends ILoginProps {

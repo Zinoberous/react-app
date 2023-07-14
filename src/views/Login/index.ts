@@ -1,5 +1,6 @@
 import Login from './Login';
+import ILoginProps from './ILoginProps';
+import ILoginState from './ILoginState';
 
 export { Login };
-export * from './ILoginProps';
-export * from './ILoginState';
+export type { ILoginProps, ILoginState };
