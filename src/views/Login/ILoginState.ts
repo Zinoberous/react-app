@@ -1,6 +1,6 @@
 export default interface ILoginState {
   loading: boolean;
-  user: string;
+  email: string;
   password: string;
   authError: boolean;
   submitted: boolean;

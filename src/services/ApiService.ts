@@ -21,10 +21,10 @@ async function call(method: 'GET' | 'POST' | 'PUT' | 'DELETE', api: string, para
   });
 }
 
-async function login(email: string, password: string): Promise<string> {
+async function login(user: string, password: string): Promise<string> {
   var formData = new FormData();
 
-  formData.append('email', email);
+  formData.append('user', user);
   formData.append('password', password);
 
   return call('POST', process.env.REACT_APP_API_LOGIN, {}, {}, formData);

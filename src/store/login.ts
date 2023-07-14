@@ -1,21 +1,37 @@
-import { JSON } from '../types';
-import { getLocalValue } from '../helper';
+import {
+  getLocalValue,
+  isNullOrWhitespace,
+  removeLocalValue,
+  setLocalValue
+} from '../helper';
 
 interface ILoginState {
-  token?: string
+  token: string|null;
 }
 
 const initialState: ILoginState = {
-  token: (getLocalValue('XX_Login') || undefined)
+  token: getLocalValue('token')
 };
 
-interface ISetLoginAction extends JSON {
-  type: 'set_login' | 'get_login';
+interface IGetLoginAction {
+  type: 'get_login';
 }
 
-const loginReducer = (state = initialState, { type, ...values }: ISetLoginAction) => {
+interface ISetLoginAction extends ILoginState {
+  type: 'set_login';
+}
+
+declare type ILoginAction  = IGetLoginAction | ISetLoginAction
+
+const loginReducer = (state = initialState, { type, ...values }: ILoginAction) => {
   switch (type) {
     case 'set_login':
+      const token = (values as ISetLoginAction).token;
+      if (!isNullOrWhitespace(token)) {
+        setLocalValue('token', token!);
+      } else {
+        removeLocalValue('token');
+      }
       return { ...state, ...values };
     case 'get_login':
     default:

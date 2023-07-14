@@ -4,7 +4,6 @@ import { ILoginProps } from './ILoginProps';
 import { ILoginState } from './ILoginState';
 import { useStateCallback } from '../../hooks';
 import { ApiServiceContext } from '../../services';
-import { setLocalValue } from '../../helper';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import styles from './Login.module.scss';
 
@@ -36,7 +35,6 @@ function Login(props: ILoginProps): JSX.Element {
 
             service.login(email, password)
               .then((token) => {
-                setLocalValue('XX_Login', token, new Date(new Date().setHours(23, 59, 59, 999)));
                 dispatch({ type: 'set_login', token });
                 setState({ submitted: true });
               })
