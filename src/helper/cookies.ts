@@ -1,10 +1,12 @@
+const prefix: string = 'XX';
+
 interface ILocalValue {
   value: string;
   expiry?: number;
 }
 
 export function getLocalValue(key: string): string|null {
-  const item = localStorage.getItem(key);
+  const item = localStorage.getItem(`${prefix}_${key}`);
 
   if (!item) {
     return null;
@@ -27,9 +29,9 @@ export function setLocalValue(key: string, value: string, expiry?: Date): void {
     data.expiry = expiry.valueOf();
   }
 
-  localStorage.setItem(key, JSON.stringify(data));
+  localStorage.setItem(`${prefix}_${key}`, JSON.stringify(data));
 }
 
 export function removeLocalValue(key: string): void {
-  localStorage.removeItem(key);
+  localStorage.removeItem(`${prefix}_${key}`);
 }

@@ -1,3 +1,7 @@
+@import './styles/variables';
+
 .app {
-  display: block;
+  .content {
+    display: block;
+  }
 }

@@ -1,5 +1,5 @@
 export function NEWID(): string {
-	return Math.random().toString(36).replace(/[^a-z]+/g, '');
+  return Math.random().toString(36).replace(/[^a-z]+/g, '');
 }
 
 export function isNull(value: any): boolean {
@@ -10,21 +10,16 @@ export function isNullOrWhitespace(value: any): boolean {
   return isNull(value) || value.toString().trim() === '';
 }
 
-export function isArray(value: any): boolean {
-  return Array.isArray(value);
+export function isArray(value: any) {
+  return !isNull(value) ? value.constructor === Array : false;
 }
 
-export function isJson(value: any): boolean {
-  try {
-    JSON.parse(value);
-    return true;
-  } catch {
-    return false;
-  }
+export function isJson(value: any) {
+  return !isNull(value) ? value.constructor === Object : false;
 }
 
-export function onlyUnique(value: any, index: number, self: any[]): boolean {
-  return self.indexOf(value) === index;
+export function getUniqueArray(array: any[]): any[] {
+  return [...Array.from(new Set(array))];
 }
 
 export function replaceAll(text: string, oldValue: string, newValue: string): string {
@@ -35,13 +30,17 @@ export function replaceAll(text: string, oldValue: string, newValue: string): st
   return result;
 }
 
+export function reverseString(string: string): string {
+  return string.split('').reverse().join('');
+}
+
 export function formatDateTime(date: Date, format: string): string {
   let result: string = JSON.stringify(format); // copy format-object
 
   result += replaceAll(result, 'yyyy', date.getFullYear().toString());
   result += replaceAll(result, 'yy', date.getFullYear().toString().slice(-2));
-  result += replaceAll(result, 'MM', `00${date.getMonth()+1}`.slice(-2));
-  result += replaceAll(result, 'M', (date.getMonth()+1).toString());
+  result += replaceAll(result, 'MM', `00${date.getMonth() + 1}`.slice(-2));
+  result += replaceAll(result, 'M', (date.getMonth() + 1).toString());
   result += replaceAll(result, 'dd', `00${date.getDate()}`.slice(-2));
   result += replaceAll(result, 'd', date.getDate().toString());
   result += replaceAll(result, 'HH', `00${date.getHours()}`.slice(-2));
@@ -55,4 +54,14 @@ export function formatDateTime(date: Date, format: string): string {
   result += replaceAll(result, 'z', `0000${date.getMilliseconds()}`.slice(-4));
 
   return result;
+}
+
+export function createNumbers(start: number, end: number): number[] {
+  const numberArray: number[] = [];
+  if (!isNull(start) && !isNull(end)) {
+    for (let i: number = start; i <= end; i++) {
+      numberArray.push(i);
+    }
+  }
+  return numberArray;
 }
