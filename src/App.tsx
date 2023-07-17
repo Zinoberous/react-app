@@ -12,29 +12,31 @@ import 'bootstrap/dist/css/bootstrap.css';
 interface IAppState {
   sidebarOpen: boolean;
   sidebarFixed: boolean;
-  sidebarSize: 'small' | 'large';
-  footerSize: 'small' | 'large';
+  sidebarSize: number;
 }
 
 function App(): JSX.Element {
   const [state, setState] = useStateCallback<IAppState>({
     sidebarOpen: false,
     sidebarFixed: true,
-    sidebarSize: 'large',
-    footerSize: 'small',
+    sidebarSize: 0,
   });
 
   return (
     <div className={styles.app}>
       <Service>
         <Header onToggleSidebar={() => setState({ sidebarOpen: !state.sidebarOpen })} />
-        <Sidebar isOpen={state.sidebarOpen} onChangeFixed={(sidebarFixed) => setState({ sidebarFixed })} onChangeSize={(sidebarSize) => setState({ sidebarSize })} />
+        <Sidebar
+          isOpen={state.sidebarOpen}
+          close={() => setState({ sidebarOpen: false })}
+          onChangeFixed={(sidebarFixed) => setState({ sidebarFixed })}
+          onChangeSize={(sidebarSize) => setState({ sidebarSize })}
+        />
         <div
           className={styles.content}
           style={{
-            marginTop: '5px',
-            marginLeft: (state.sidebarOpen && state.sidebarFixed ? (state.sidebarSize === 'large' ? '200px' : '50px') : 'unset'),
-            marginBottom: (state.footerSize === 'large' ? '300px' : '50px')
+            marginTop: '50px',
+            marginLeft: (state.sidebarOpen && state.sidebarFixed ? `${state.sidebarSize}px` : 'unset'),
           }}
         >
           <HashRouter>
@@ -43,17 +45,17 @@ function App(): JSX.Element {
                 {/* Default */}
                 <Route
                   path='/'
-                  element={<Navigate replace to='login' />}
+                  element={<Navigate to='home' />}
                 />
                 {/* Not found */}
                 <Route
                   path='*'
-                  element={<>Existiert nicht!</>}
+                  element={<Navigate to='home' />}
                 />
                 {/* Routes */}
                 <Route
                   path='login'
-                  element={<Login />}
+                  element={<Login redirect='home' />}
                 />
                 <Route
                   path='home'
@@ -63,7 +65,7 @@ function App(): JSX.Element {
             </Suspense>
           </HashRouter>
         </div>
-        <Footer onChangeSize={(footerSize) => setState({ footerSize })} />
+        <Footer />
       </Service>
     </div>
   );

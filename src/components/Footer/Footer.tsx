@@ -1,10 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import IFooterProps from './IFooterProps';
 
-function Footer(): JSX.Element {
+function Footer(props: IFooterProps): JSX.Element {
   return (
     <div></div>
   );
 }
 
-export default connect()(Footer);
+export default Footer;

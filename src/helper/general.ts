@@ -1,5 +1,11 @@
+import { JSON } from '../types';
+
 export function NEWID(): string {
   return Math.random().toString(36).replace(/[^a-z]+/g, '');
+}
+
+export function pseudoId(data: ({ id: number } & JSON)[]) {
+  return (!data.some(x => x.id < 0) ? -1 : Math.min(...data.map(x => x.id)) -1);
 }
 
 export function isNull(value: any): boolean {

@@ -1,10 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import ISidebarProps from './ISidebarProps';
 
-function Sidebar(): JSX.Element {
+function Sidebar(props: ISidebarProps): JSX.Element {
   return (
     <div></div>
   );
 }
 
-export default connect()(Sidebar);
+export default Sidebar;

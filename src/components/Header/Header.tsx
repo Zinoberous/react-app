@@ -1,10 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import IHeaderProps from './IHeaderProps';
 
-function Header(): JSX.Element {
+function Header(props: IHeaderProps): JSX.Element {
   return (
     <div></div>
   );
 }
 
-export default connect()(Header);
+export default Header;
