@@ -1,17 +1,16 @@
 import React, { useContext } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { ILoginProps } from './ILoginProps';
-import { ILoginState } from './ILoginState';
+import { Navigate } from 'react-router-dom';
+import ILoginProps from './ILoginProps';
+import ILoginState from './ILoginState';
 import { useStateCallback } from '../../hooks';
 import { ApiServiceContext } from '../../services';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button, FormFeedback } from 'reactstrap';
 import styles from './Login.module.scss';
 
 function Login(props: ILoginProps): JSX.Element {
   const [state, setState] = useStateCallback<ILoginState>({
     loading: false,
-    email: null,
-    password: null,
     authError: false,
     submitted: false
   });
@@ -20,7 +19,7 @@ function Login(props: ILoginProps): JSX.Element {
     return <Navigate to={props.redirect} />;
   }
 
-  const service = useContext(ApiServiceContext);
+  const service = useContext(ApiServiceContext)!;
 
   const dispatch = useDispatch();
 
@@ -33,7 +32,7 @@ function Login(props: ILoginProps): JSX.Element {
           setState({ loading: true }, () => {
             const { email, password } = state;
 
-            service.login(email, password)
+            service.login(email!, password!)
               .then((token) => {
                 dispatch({ type: 'set_login', token });
                 setState({ submitted: true });
@@ -52,6 +51,7 @@ function Login(props: ILoginProps): JSX.Element {
             type='email'
             required
             placeholder='E-Mail:'
+            value={state.email}
             onChange={(e) => setState({ email: e.target.value })}
             invalid={state.authError}
           />
@@ -62,6 +62,7 @@ function Login(props: ILoginProps): JSX.Element {
             type='password'
             required
             placeholder='Passwort:'
+            value={state.password}
             onChange={(e) => setState({ password: e.target.value })}
             invalid={state.authError}
           />

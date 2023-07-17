@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
 import { HttpTransportType, HubConnection, HubConnectionBuilder, HubConnectionState, IHttpConnectionOptions } from '@microsoft/signalr';
-import { getToken } from '../helper';
+import Store from '../store';
 
 export interface IKeyValuePair {
   key: string;
@@ -30,7 +30,7 @@ let hubConnection: HubConnection;
 
 let hubOptions: IHttpConnectionOptions = {
   accessTokenFactory: async () => {
-    return (await getToken());
+    return Store.getState().login.token!;
   }
 };
 

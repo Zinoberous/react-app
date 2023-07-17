@@ -1,4 +1,4 @@
-node: 16.20.0
+node: 16.x
 
 new app:
 npx create-react-app <name> --template typescript

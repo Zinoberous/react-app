@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Service from './services';
 import { useStateCallback } from './hooks';
+import { Header, Footer, Sidebar } from './components';
 import { Spinner } from 'reactstrap';
 import { Login, Private, Home } from './views';
 import styles from './App.module.scss';
@@ -30,9 +31,9 @@ function App(): JSX.Element {
         <Sidebar isOpen={state.sidebarOpen} onChangeFixed={(sidebarFixed) => setState({ sidebarFixed })} onChangeSize={(sidebarSize) => setState({ sidebarSize })} />
         <div
           className={styles.content}
-          styles={{
-            marginTop: '5px';
-            marginLeft: (state.sidebarOpen && state.sidebarFixed ? (state.sidebarSize === 'large' ? '200px' : '50px') : 'unset')
+          style={{
+            marginTop: '5px',
+            marginLeft: (state.sidebarOpen && state.sidebarFixed ? (state.sidebarSize === 'large' ? '200px' : '50px') : 'unset'),
             marginBottom: (state.footerSize === 'large' ? '300px' : '50px')
           }}
         >
