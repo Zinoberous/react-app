@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
 import { HttpTransportType, HubConnection, HubConnectionBuilder, HubConnectionState, IHttpConnectionOptions } from '@microsoft/signalr';
-import Store from '../store';
+import Store from '../stores';
 
 export interface IKeyValuePair {
   key: string;

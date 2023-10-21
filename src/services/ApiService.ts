@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
 import axios from 'axios';
-import Store from '../store';
+import Store from '../stores';
 
 export interface IApiService {
   login: (email: string, password: string) => Promise<string>;
